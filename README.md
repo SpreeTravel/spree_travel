@@ -23,7 +23,7 @@ Spree Travel is not yet distributed as a gem, so it should be used in your app w
 1. Add the following to your Gemfile
 
   ```ruby
-    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-3-stable'
+    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-4-stable'
   ```
 
 2. Run `bundle install`
@@ -32,6 +32,45 @@ Spree Travel is not yet distributed as a gem, so it should be used in your app w
 
   ```
   rails g spree_travel:install
+  ```
+
+Installation (alternate)
+------------
+
+1. Add the following to your gemfile:
+
+  ```ruby
+    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-4-stable'
+    gem 'spree_travel_core’, :git => 'https://github.com/openjaf/spree_travel_core.git', :branch => '2-4-stable'
+    gem 'spree_travel_hotel’, :git => 'https://github.com/openjaf/spree_travel_hotel.git', :branch => '2-4-stable'
+    gem 'spree_travel_package’, :git => 'https://github.com/openjaf/spree_travel_package.git', :branch => '2-4-stable'
+    gem 'spree_travel_sample’, :git => 'https://github.com/openjaf/spree_travel_sample.git', :branch => '2-4-stable'
+  ```
+
+2. run `bundle install`
+
+3. To copy and install migrations and assets run:
+
+  ```ruby
+  rails generate spree_travel:install
+  rails generate spree_travel_core:install
+  rails generate spree_travel_hotel:install
+  rails generate spree_travel_package:install
+  rails generate spree_travel_sample:install
+  ```
+
+4. To load seed data needed to spree travel to work correctly run:
+
+  ```ruby
+  rake spree_travel_core:load
+  rake spree_travel_hotel:load
+  rake spree_travel_package:load
+  ```
+
+5. To load sample data run:
+
+  ```ruby
+  rake spree_travel_sample:load PRODUCT_TYPE=all,hotels,packages
   ```
 
 Features
