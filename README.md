@@ -44,6 +44,7 @@ Installation (alternate)
     gem 'spree_travel_core’, :git => 'https://github.com/openjaf/spree_travel_core.git', :branch => '2-4-stable'
     gem 'spree_travel_hotel’, :git => 'https://github.com/openjaf/spree_travel_hotel.git', :branch => '2-4-stable'
     gem 'spree_travel_package’, :git => 'https://github.com/openjaf/spree_travel_package.git', :branch => '2-4-stable'
+    gem 'spree_travel_flight’, :git => 'https://github.com/openjaf/spree_travel_flight.git', :branch => '2-4-stable'
     gem 'spree_travel_sample’, :git => 'https://github.com/openjaf/spree_travel_sample.git', :branch => '2-4-stable'
   ```
 
@@ -56,6 +57,7 @@ Installation (alternate)
   rails generate spree_travel_core:install
   rails generate spree_travel_hotel:install
   rails generate spree_travel_package:install
+  rails generate spree_travel_flight:install
   rails generate spree_travel_sample:install
   ```
 
@@ -65,6 +67,7 @@ Installation (alternate)
   rake spree_travel_core:load
   rake spree_travel_hotel:load
   rake spree_travel_package:load
+  rake spree_travel_flight:load
   ```
 
 5. To load sample data run:
