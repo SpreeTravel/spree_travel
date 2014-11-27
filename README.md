@@ -40,7 +40,6 @@ Installation (alternate)
 1. Add the following to your gemfile:
 
   ```ruby
-    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-4-stable'
     gem 'spree_travel_core’, :git => 'https://github.com/openjaf/spree_travel_core.git', :branch => '2-4-stable'
     gem 'spree_travel_hotel’, :git => 'https://github.com/openjaf/spree_travel_hotel.git', :branch => '2-4-stable'
     gem 'spree_travel_package’, :git => 'https://github.com/openjaf/spree_travel_package.git', :branch => '2-4-stable'
@@ -53,12 +52,10 @@ Installation (alternate)
 3. To copy and install migrations and assets run:
 
   ```ruby
-  rails generate spree_travel:install
   rails generate spree_travel_core:install
   rails generate spree_travel_hotel:install
   rails generate spree_travel_package:install
   rails generate spree_travel_flight:install
-  rails generate spree_travel_sample:install
   ```
 
 4. To load seed data needed to spree travel to work correctly run:
