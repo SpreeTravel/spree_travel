@@ -1,4 +1,9 @@
 # encoding: UTF-8
+
+require 'yaml'
+yaml = YAML.load(File.read('SPREE_TRAVEL_VERSIONS'))
+versions = yaml['gems']
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_travel'
@@ -16,7 +21,11 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.0.3.beta'
+  s.add_dependency 'spree_core', '~> ' + versions['spree']
+  # s.add_dependency 'spree_travel_core', '~> ' + versions['spree']
+  # s.add_dependency 'spree_travel_sample', '~> ' + versions['spree']
+  # s.add_dependency 'spree_travel_hotel', '~> ' + versions['spree']
+  # s.add_dependency 'spree_travel_flight', '~> ' + versions['spree']
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
