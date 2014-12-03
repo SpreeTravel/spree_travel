@@ -1,7 +1,7 @@
 module SpreeTravel
   module Generators
     class InstallGenerator < Rails::Generators::Base
-
+      require 'spree_travel_core'
       class_option :auto_run_migrations, :type => :boolean, :default => false
 
       def add_javascripts
@@ -16,6 +16,8 @@ module SpreeTravel
 
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=spree_travel'
+        run 'bundle exec rake railties:install:migrations FROM=spree_travel_core'
+        run 'bundle exec rake railties:install:migrations FROM=spree_travel_hotel'
       end
 
       def run_migrations
@@ -26,6 +28,10 @@ module SpreeTravel
           puts 'Skipping rake db:migrate, don\'t forget to run it!'
         end
       end
+
+      # def run_other_stuffs
+      #   run 'rails generate spree_travel_core:install --auto_run_migrations=false'
+      # end
     end
   end
 end
