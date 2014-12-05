@@ -2,36 +2,47 @@ module SpreeTravel
   module Generators
     class InstallGenerator < Rails::Generators::Base
       require 'spree_travel_core'
+      require 'spree_travel/support'
       class_option :auto_run_migrations, :type => :boolean, :default => false
+      class_option :full_install, :type => :boolean, :default => false
 
-      def add_javascripts
-        append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require store/spree_travel\n"
-        append_file 'vendor/assets/javascripts/spree/backend/all.js', "//= require admin/spree_travel\n"
-      end
+      def add_other_extensions
 
-      def add_stylesheets
-        inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require store/spree_travel\n", :before => /\*\//, :verbose => true
-        inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require admin/spree_travel\n", :before => /\*\//, :verbose => true
-      end
+        extensions = ['hotel', 'flight']
 
-      def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_travel'
-        run 'bundle exec rake railties:install:migrations FROM=spree_travel_core'
-        run 'bundle exec rake railties:install:migrations FROM=spree_travel_hotel'
+        puts "Installing core library..."
+
+        silent_run("rails generate spree_travel_core:install --auto_run_migrations=true")
+
+        puts
+
+        extensions.each do |extension|
+
+          install_extension = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} product type features? [Y/n]")
+
+          if install_extension
+            puts "Installing #{extension} features..."
+            silent_run("rails generate spree_travel_#{extension}:install --auto_run_migrations=true")
+
+            load_sample = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} sample data? [Y/n]")
+
+            if load_sample
+              puts "Installing #{extension} sample data..."
+            end
+          else
+            puts "Skipping installation of #{extension} features..."
+          end
+        end
       end
 
       def run_migrations
         run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
-        if run_migrations
+        if run_migrations || options[:full_install]
           run 'bundle exec rake db:migrate'
         else
           puts 'Skipping rake db:migrate, don\'t forget to run it!'
         end
       end
-
-      # def run_other_stuffs
-      #   run 'rails generate spree_travel_core:install --auto_run_migrations=false'
-      # end
     end
   end
 end
