@@ -5,6 +5,9 @@ module SpreeTravel
       require 'spree_travel/support'
       class_option :auto_run_migrations, :type => :boolean, :default => false
       class_option :full_install, :type => :boolean, :default => false
+      class_option :without_sample, :type => :boolean, :default => false
+      class_option :hotel, :type => :boolean, :default => false
+      class_option :flight, :type => :boolean, :default => false
 
       def add_other_extensions
 
@@ -18,7 +21,11 @@ module SpreeTravel
 
         extensions.each do |extension|
 
-          install_extension = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} product type features? [Y/n]")
+          install_extension = options[extension]
+
+          unless install_extension
+            install_extension = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} product type features? [Y/n]")
+          end
 
           if install_extension
             puts "Installing #{extension} features..."
@@ -28,9 +35,11 @@ module SpreeTravel
 
             if load_sample
               puts "Installing #{extension} sample data..."
+            else
+              puts "Skipping installation of #{extension} sample data..."
             end
           else
-            puts "Skipping installation of #{extension} features..."
+            puts "Skipping installation of #{extension} features you can install it later using --#{extension} attribute"
           end
         end
       end
