@@ -3,43 +3,56 @@ module SpreeTravel
     class InstallGenerator < Rails::Generators::Base
       require 'spree_travel_core'
       require 'spree_travel/support'
+      require 'colored'
       class_option :auto_run_migrations, :type => :boolean, :default => false
       class_option :full_install, :type => :boolean, :default => false
       class_option :without_sample, :type => :boolean, :default => false
-      class_option :hotel, :type => :boolean, :default => false
-      class_option :flight, :type => :boolean, :default => false
+      class_option :with_libs, :type => :array, :default => []
 
       def add_other_extensions
 
-        extensions = ['hotel', 'flight']
+        extensions = options[:with_libs]
+        all_extensions = ['hotel', 'flight']
 
-        puts "Installing core library..."
+        puts "Installing core library...".green
 
         silent_run("rails generate spree_travel_core:install --auto_run_migrations=true")
 
-        puts
+        puts "." * 20
+
+        puts "Successfully installed core library".green
+
+        if extensions == []
+          extensions = all_extensions
+        else
+          extensions.each do |extension|
+            unless all_extensions.include?(extension)
+              puts "Invalid extension name, #{extension}, it wont be installed ...".red.bold
+            end
+          end
+        end
 
         extensions.each do |extension|
 
           install_extension = options[extension]
 
           unless install_extension
-            install_extension = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} product type features? [Y/n]")
+            install_extension = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} product type features? [Y/n]".yellow)
           end
 
           if install_extension
-            puts "Installing #{extension} features..."
+            puts "Installing #{extension} features...".green
             silent_run("rails generate spree_travel_#{extension}:install --auto_run_migrations=true")
 
-            load_sample = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} sample data? [Y/n]")
+            load_sample = options[:full_install] || ['', 'y', 'Y'].include?(ask "Would you like to add the #{extension} sample data? [Y/n]".yellow)
 
             if load_sample
-              puts "Installing #{extension} sample data..."
+              puts "Installing #{extension} sample data...".green
             else
               puts "Skipping installation of #{extension} sample data..."
             end
           else
-            puts "Skipping installation of #{extension} features you can install it later using --#{extension} attribute"
+            puts "Skipping installation of #{extension} features you can install it later using --with_libs = [#{extension}] attribute".yellow
           end
         end
       end
