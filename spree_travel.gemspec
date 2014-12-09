@@ -7,9 +7,9 @@ versions = yaml['gems']
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_travel'
-  s.version     = '2.0.3.beta'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = '2.4.2'
+  s.summary     = 'Meta package for spree travel platform'
+  s.description = 'Meta package dependencies for spree travel installation'
   s.required_ruby_version = '>= 1.9.3'
 
   # s.author    = 'You'
