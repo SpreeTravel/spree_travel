@@ -78,6 +78,9 @@ Features
 
 - Encapsultes the behaivor of the spree_travel pack to extend spree into a travel agency manager site.
 
+Future Work
+------------
+
 
 Contributing
 ------------
