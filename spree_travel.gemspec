@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.description = 'TODO: Add (optional) gem description here'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.authors   = ['Pedro Quintero', 'Miguel Sancho', 'Cesar Lage', 'Raul Perez-alejo', 'Alejandro Dustet']
+  s.email     = 'pqr@openjaf.com'
+  s.homepage  = 'http://github.com/openjaf/spree_travel_core'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   # s.add_dependency 'spree_travel_sample', '~> ' + versions['spree']
   # s.add_dependency 'spree_travel_hotel', '~> ' + versions['spree']
   # s.add_dependency 'spree_travel_flight', '~> ' + versions['spree']
+  # s.add_dependency 'spree_travel_package', '~> ' + versions['spree']
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
