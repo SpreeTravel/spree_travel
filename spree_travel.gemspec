@@ -7,9 +7,9 @@ versions = yaml['gems']
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_travel'
-  s.version     = '2.0.3.beta'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.version     = '2.4.2'
+  s.summary     = 'Meta package for spree travel platform'
+  s.description = 'Meta package dependencies for spree travel installation'
   s.required_ruby_version = '>= 1.9.3'
 
   s.authors   = ['Pedro Quintero', 'Miguel Sancho', 'Cesar Lage', 'Raul Perez-alejo', 'Alejandro Dustet']
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> ' + versions['spree']
+  s.add_dependency 'colored'
   # s.add_dependency 'spree_travel_core', '~> ' + versions['spree']
   # s.add_dependency 'spree_travel_sample', '~> ' + versions['spree']
   # s.add_dependency 'spree_travel_hotel', '~> ' + versions['spree']

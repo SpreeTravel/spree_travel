@@ -24,7 +24,7 @@ Spree Travel is not yet distributed as a gem, so it should be used in your app w
 1. Add the following to your Gemfile
 
   ```ruby
-    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-3-stable'
+    gem 'spree_travel’, :git => 'https://github.com/openjaf/spree_travel.git', :branch => '2-4-stable'
   ```
 
 2. Run `bundle install`
@@ -35,13 +35,20 @@ Spree Travel is not yet distributed as a gem, so it should be used in your app w
   rails g spree_travel:install
   ```
 
+<<<<<<< HEAD
   If you wish to install some independent features run it with the attribute **--with-libs** wich is an array holding the libraries that will be installed, the options are **[hotel, flight]**.
+=======
+  If you wish to install some independent and not all of them features run it with the attribute **--with_libs** wich is an array holding the libraries that will be installed, the options are **[hotel, flight]**.
+>>>>>>> f48403013980b1b73a95b8936ce39ed2ee9ec4c7
 
 
 Features
 ------------
 
-- Encapsultes the behaivor of the spree_travel pack to extend spree into a travel agency manager site.
+- Encapsultes the behavior of the spree_travel pack to extend spree into a travel agency manager site.
+
+Future Work
+------------
 
 
 Contributing
