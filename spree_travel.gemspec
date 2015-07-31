@@ -7,16 +7,16 @@ Gem::Specification.new do |s|
   s.description = 'Meta package dependencies for spree travel installation'
   s.required_ruby_version = '>= 1.9.3'
 
-  s.authors   = ['Pedro Quintero', 'Miguel Sancho', 'Cesar Lage', 'Raul Perez-alejo', 'Alejandro Dustet']
-  s.email     = 'pqr@openjaf.com'
-  s.homepage  = 'http://github.com/openjaf/spree_travel_core'
+  s.authors   = ['Pedro Quintero Rojas', 'Miguel Sancho Fernandez', 'Cesar Lage Codorníu', 'Raul Perez-Alejo Neyra']
+  s.email     = 'info@openjaf.com'
+  s.homepage  = 'http://github.com/openjaf/spree_travel'
 
-  #s.files       = `git ls-files`.split("\n")
+  s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> ' + versions['spree']
+  s.add_dependency 'spree_core', '~> ' + version['spree']
   s.add_dependency 'colored'
   # s.add_dependency 'spree_travel_core', '~> ' + versions['spree']
   # s.add_dependency 'spree_travel_sample', '~> ' + versions['spree']
