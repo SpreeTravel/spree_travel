@@ -1,9 +1,11 @@
+require 'spree_travel_core'
+require 'spree_travel/support'
+require 'colored'
+
 module SpreeTravel
   module Generators
     class InstallGenerator < Rails::Generators::Base
-      require 'spree_travel_core'
-      require 'spree_travel/support'
-      require 'colored'
+
       class_option :auto_run_migrations, :type => :boolean, :default => false
       class_option :full_install, :type => :boolean, :default => false
       class_option :without_sample, :type => :boolean, :default => false
@@ -12,7 +14,7 @@ module SpreeTravel
       def add_other_extensions
 
         extensions = options[:with_libs]
-        all_extensions = ['hotel', 'flight']
+        all_extensions = ['hotel']
 
         puts "Installing core library...".green
 
