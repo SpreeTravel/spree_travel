@@ -1,6 +1,6 @@
 SpreeTravel
 ===========
-Spree Travel is an extension for rails e-commerce platform [spree](https://github.com/spree/spree). The goal of Spree Travel is to provide Spree with the essential functionalities to behave like a travel agency management platform. This means that this extensions will add new logic and concepts, and will modify some of the definition it holds:
+Spree Travel is an extension for rails e-commerce platform [spree](https://github.com/spree/spree).The goal of Spree Travel is to provide Spree with the essential functionalities to behave as a travel agency management platform. Meaning that this extension will add new models, behaviors, views, etc… to spree, and will modify some of the definitions it holds. Spree Travel consists in a group of gems that modularizes all the behaviors intended to create with the extension:
 
 - [Spree Travel Core](https://github.com/openjaf/spree_travel_core), holds the logic under the hole group of extensions.
 - [Spree Travel Hotel](https://github.com/openjaf/spree_travel_hotel), holds the definitions to model hotels product_types.
@@ -17,8 +17,7 @@ Requirements
 Spree Travel now requires Rails version **>= 4.0** and a Spree version **>=2.4**.
 Set up a complete Spree instalation, be sure to execute the seeds. Example products are not necesary.
 
-
-Installation(use alternate, this one is not ready jet)
+Installation
 ------------
 
 Spree Travel is not yet distributed as a gem, so it should be used in your app with a git reference or you can download the source and build the gem on your own.
@@ -31,43 +30,25 @@ Spree Travel is not yet distributed as a gem, so it should be used in your app w
 
 2. Run `bundle install`
 
-3. To copy and apply migrations run:
+3. To copy and apply migrations and features of all the gems on the package run:
 
   ```
   rails g spree_travel:install
   ```
 
-Installation (alternate)
-------------
 
-1. Add the following to your gemfile:
-
-  ```ruby
-    gem 'spree_travel_core’, :github => 'openjaf/spree_travel_core.git', :branch => '2-4-stable'
-    gem 'spree_travel_hotel’, :github => 'openjaf/spree_travel_hotel.git', :branch => '2-4-stable'
-    gem 'spree_travel_sample’, :github => 'openjaf/spree_travel_sample.git', :branch => '2-4-stable'
-  ```
-
-2. run `bundle install`
-
-3. To copy and install migrations, assets, and load seeds run:
-
-  ```ruby
-  rails generate spree_travel_core:install
-  rails generate spree_travel_hotel:install
-  ```
-
-4. To load sample data run:
-
-  ```ruby
-  rake spree_travel_sample:load PRODUCT_TYPE=hotels
-  ```
+If you wish to install some independent and not all of them features run it with the attribute **--with_libs** wich is an array holding the libraries that will be installed, the options are **[hotel, flight]**.
 
 Features
 ------------
 
-- Encapsultes the behaivor of the spree_travel pack to extend spree into a travel agency manager site.
+- Encapsultes the behavior of the spree_travel pack to extend spree into a travel agency manager site.
 
+Future Work
+------------
+
+- Complete Package Product Type
+- Complete Flight Product Type
 
 Contributing
 ------------
