@@ -1,29 +1,21 @@
 Add to your Gemfile
 ===================
 
-gem 'spree', :git => 'https://github.com/spree/spree', :branch => '2-4-stable'
-gem 'spree_auth_devise', :git => 'https://github.com/spree/spree_auth_devise', :branch => '2-4-stable'
+gem 'spree', :github => 'spree/spree', :branch => '2-4-stable'
+gem 'spree_auth_devise', :github => 'spree/spree_auth_devise', :branch => '2-4-stable'
 
-gem 'spree_travel_core', :path => 'https://github.com/openjaf/spree_travel_core', :branch => '2-4-stable'
-gem 'spree_travel_hotel', :path => 'https://github.com/openjaf/spree_travel_hotel', :branch => '2-4-stable'
-gem 'spree_travel_flight', :path => 'https://github.com/openjaf/spree_travel_flight', :branch => '2-4-stable'
-gem 'spree_travel_package', :path => 'https://github.com/openjaf/spree_travel_package', :branch => '2-4-stable'
-gem 'spree_travel_sample', :path => 'https://github.com/openjaf/spree_travel_sample', :branch => '2-4-stable'
+gem 'spree_travel_core', :github => 'openjaf/spree_travel_core', :branch => '2-4-stable'
+gem 'spree_travel_hotel', :github => 'openjaf/spree_travel_hotel', :branch => '2-4-stable'
+gem 'spree_travel_sample', :github => 'openjaf/spree_travel_sample', :branch => '2-4-stable'
 
 Execute the following in your console
 =====================================
 bundle install
 
-rails generate spree:install
+rails generate spree:install (you can remove sample products with 'destroy_all' if you like)
 
 rails generate spree_travel_core:install
 rails generate spree_travel_hotel:install
-rails generate spree_travel_flight:install
-rails generate spree_travel_package:install
 
-rake spree_travel_sample:load
-rake spree_travel_hotel:load
-rake spree_travel_flight:load
-rake spree_travel_package:load
+rake spree_travel_sample:load PRODUCT_TYPE=hotels
 
-rake spree_travel_sample:load
