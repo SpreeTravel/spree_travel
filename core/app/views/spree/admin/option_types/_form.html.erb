@@ -1,0 +1,34 @@
+<div data-hook="admin_option_type_form_fields" class="align-center row">
+  <div class="col-md-6">
+    <%= f.field_container :name, class: ['form-group'] do  %>
+    	<%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
+    	<%= f.text_field :name, class: 'form-control' %>
+    	<%= f.error_message_on :name %>
+    <% end %>
+  </div>
+
+  <div class="col-md-6">
+    <%= f.field_container :presentation, class: ['form-group'] do  %>
+    	<%= f.label :presentation, Spree.t(:presentation) %> <span class="required">*</span><br />
+    	<%= f.text_field :presentation, class: 'form-control' %>
+    	<%= f.error_message_on :presentation %>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <% if @option_type.new_record? %>
+	    <%= f.field_container :attr_type do %>
+	    	<%= f.label :attr_type, Spree.t(:attr_type) %> <span class="required">*</span><br />
+	    	<%= f.select :attr_type, ['selection', 'float', 'string', 'integer', 'date', 'boolean'], {}, :class => "fullwidth select2" %>
+	    	<%= f.error_message_on :attr_type %>
+	    <% end %>
+    <% else %>
+	    <%= f.field_container :attr_type do %>
+	    	<%= f.label :attr_type, Spree.t(:attr_type) %> <span class="required">*</span><br />
+	    	<%= f.text_field :attr_type, :disabled => true, :class => "fullwidth form-control" %>
+	    	<%= f.error_message_on :attr_type %>
+	    <% end %>
+    <% end %>
+  </div>
+
+</div>

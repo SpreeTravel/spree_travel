@@ -1,0 +1,4 @@
+loading ruby /Volumes/Data/Important/spree_travel/openjaf/spree_travel_hotel/lib/tasks/../../db/default/spree/01.option_types.rb
+loading ruby /Volumes/Data/Important/spree_travel/openjaf/spree_travel_hotel/lib/tasks/../../db/default/spree/02.option_values.rb
+loading ruby /Volumes/Data/Important/spree_travel/openjaf/spree_travel_hotel/lib/tasks/../../db/default/spree/03.product_types.rb
+loading ruby /Volumes/Data/Important/spree_travel/openjaf/spree_travel_hotel/lib/tasks/../../db/default/spree/04.calculators.rb

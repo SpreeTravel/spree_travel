@@ -1,0 +1,61 @@
+#hotel{
+    float: left;
+}
+
+span.stars-1{
+    background-image: url('stars.png');
+    background-position: 0px 20px;
+    width: 73px;
+    height: 16px;
+    float: left;
+}
+
+span.stars-2{
+    background-image: url('stars.png');
+    background-position: 0px 33px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-3{
+    background-image: url('stars.png');
+    background-position: 0px 46px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-4{
+    background-image: url('stars.png');
+    background-position: 0px 59px;
+    width: 73px;
+    height: 15px;
+    float: left;
+}
+
+span.stars-5{
+    background-image: url('stars.png');
+    background-position: 0px 0px;
+    width: 73px;
+    height: 16px;
+    float: left;
+}
+
+.search_date, .search_pax, .search_meal{
+    list-style: none;
+}
+
+ul.search_pax li{
+  display: inline;
+  float: left;
+  margin-right: 30px;
+}
+
+input#destination, input#keywords{
+  margin-top: 15px;
+}
+
+input#start_date, input#end_date{
+  margin-top: 15px;
+}

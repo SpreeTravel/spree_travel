@@ -1,0 +1,2 @@
+<!-- remove 'h1.taxon-title' 
+     sequence :after => "insert_search_box" -->

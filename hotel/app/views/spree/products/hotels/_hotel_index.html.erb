@@ -1,0 +1,54 @@
+<%
+   kls = "col-md-12 product-item"
+   new_params = params.clone
+   new_params.merge!({:controller => "spree/products", :action => "show" , :id => product.slug})
+   otro_params = new_params.clone
+%>
+
+<li id="product_<%= product.id %>" class="<%= kls %>" data-hook2="product_<%=product.product_type%>" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
+  <div class="col-md-2">
+    <%= link_to small_image(product, :itemprop => "image"),  new_params, :itemprop => 'url' %>
+  </div>
+  <div class="col-md-7">
+    <div class="product-title">
+      <%= link_to(new_params, :class => 'info', :itemprop => "name", :title => product.name) do %>
+          <%= product.name %>
+      <%end%>
+      <span class="stars-<%= hotel_stars(product) %>"></span>
+    </div>
+    <div class="product-destination">
+      <%= link_to product.destination, nested_taxons_path(product.destination_taxon.permalink)  %>
+    </div>
+    <div class="product-mini-description">
+      <%= truncate(product.description, :length => 300)%>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="details col-xs-12 col-sm-8 col-md-9">
+      <div>
+        <div>
+          <div class="box-title">
+            <h4 class="title"><%= product.variants.first.option_values.first.presentation%></h4>
+          </div>
+        </div>
+      </div>
+      <% hash = display_travel_price(product)%>
+      <% if !hash.empty? %>
+        <div class="price-section">
+          <span class="price"><small>MEAL PLAN:</small> <%= Spree::OptionValue.find(Spree::Rate.find(hash.first[:rate]).plan).presentation%></span><br/>
+          <span class="price"><small>PER/NIGHT:</small> <%=hash.first[:price]%></span>
+        </div>
+        <div class="action-section">
+          <%= render :partial => 'spree/products/product_type_cart_form', :locals => { product: product, variant_id: product.variants.first.id, rate_id: hash.first[:rate], mini: true} %>
+        </div>
+      <%else%>
+        <div class="price">
+          <span><%= t(:no_price) %> </span>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</li>
+
+
+

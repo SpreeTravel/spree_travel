@@ -1,0 +1,40 @@
+<h3>Filter:</h3>
+
+<% for ot in @product.rate_option_types %>
+  <div class="filter_wrapper" id="<%=ot.name%>" data-type="<%=ot.attr_type%>">
+    <b> <%= ot.presentation %> :</b>
+    <div>
+      <%
+        values = []
+        for rt in @product.rates
+          values << rt.get_persisted_option_value(ot, 'presentation')
+        end
+        values.uniq!
+        comparison_options = [['>', 1], ['<', 2], ['=', 3], ['>=', 4], ['<=', 5]]
+      %>
+      <% if ot.attr_type == 'date' %>
+        <b> between </b>
+        <%= select_tag "#{ot.name}_from", options_for_select(values), class: 'select2' %>
+        <b> and </b>
+        <%= select_tag "#{ot.name}_to", options_for_select(values), class: 'select2' %>
+      <% elsif ot.attr_type == 'integer' %>
+        <%= select_tag ot.name + '_comparison', options_for_select(comparison_options), class: 'select2' %>
+        <%= select_tag "#{ot.name}", options_for_select(values), class: 'select2' %>
+      <% elsif ot.attr_type == 'float' %>
+        <%= select_tag ot.name + '_comparison', options_for_select(comparison_options), class: 'select2' %>
+        <%= select_tag "#{ot.name}", options_for_select(values), class: 'select2' %>
+      <% elsif ot.attr_type == 'selection' %>
+        <%= select_tag "#{ot.name}", options_for_select(values), class: 'select2' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div class="filter_action">
+  <button class="icon-plus button" name="filter" id="filter_button">Filter</button>
+  <button class="icon-plus button" name="filter" id="clear_filter_button">Clear Filters</button>
+  <%= form_tag(delete_rates_admin_product_path(@product), :method => :post, :remote => true) do %>
+    <%= hidden_field_tag(:rates, []) %>
+    <button class="button icon-delete" name="delete_rates" id="delete_rates_button" data-confirm="Are you sure??">Delete Rates</button>
+  <%end%>
+</div>

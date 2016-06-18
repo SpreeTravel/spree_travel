@@ -1,0 +1,21 @@
+<%#= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => 'Product Rate'} %>
+
+<% content_for :page_title do %>
+  <%= Spree.t(:edit_rate) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to_with_icon 'arrow-left', Spree.t(:back_to_resource_list, resource: Spree::Rate.model_name.human), admin_product_rates_path, class: 'btn btn-default' %>
+<% end %>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @rate } %>
+
+<%= form_for [:admin, @product, @rate] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
+

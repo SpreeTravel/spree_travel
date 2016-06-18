@@ -1,0 +1,79 @@
+<%
+   params["#{prefix}start_date"] ||= Time.now.to_date
+   params["#{prefix}end_date"] ||= Time.now.to_date + 3
+   params["#{prefix}adult"] ||= 2
+   params["#{prefix}child"] ||= 0
+   params["#{prefix}room_count"] ||= 1
+
+   if p.name.downcase == active_product
+     active_tab = 'active'
+   else
+     active_tab = ''
+   end
+   hotel = Spree::ProductType.find_by_name('hotel')
+%>
+<div id='<%="#{prefix}fields"%>' class="tab-pane <%= active_tab %>" role="tabpanel">
+  <div class="col-md-12" >
+    <%= form_tag({:controller => :products, :action => :index}, {:method => :get, :id => :home_search_box}) do %>
+
+      <input type="hidden" id="the_product_type" name="product_type" value="hotel">
+
+      <% destination =  hotel.context_option_types.where(attr_type: 'destination').first %>
+      <div class="search_box_row form-group">
+        <label for="<%= prefix %><%=destination.name%>"><%= Spree.t(destination.presentation) %></label>
+        <div class="search_box_right">
+          <%= text_field_tag "#{prefix}destination", params['hotel_destination'], :class => "#{prefix}inputs form-control", list: 'destinations' %>
+          <!-- This must be moved to an ajax request into frontend/spree/taxon_controller -->
+          <datalist id="destinations">
+            <% if !Spree::Taxon.where(permalink: 'destination').empty?
+                 Spree::Taxon.includes(:children).where(name: 'Destination').first.children.each do |d|
+            %>
+              <option value="<%= d.name %>">
+              <%end%>
+            <%end%>
+          </datalist>
+        </div>
+      </div>
+
+      <div class="row">
+        <% hotel.context_option_types.where(attr_type: 'date').each do |d| %>
+          <div class="search_box_row form-group col-md-6">
+            <label for="<%= prefix %><%=d.name%>"><%= Spree.t(d.presentation.downcase) %></label>
+            <%= text_field_tag "#{prefix}#{d.name}", params["hotel_#{d.name}"], :class => "datepicker #{prefix}inputs form-control" %>
+          </div>
+        <%end%>
+      </div>
+
+      <div class="row search_box_row form-group">
+
+        <% hotel.context_option_types.where(name: 'room_count').each do |rc| %>
+          <div class="form-group col-md-4">
+            <label for="<%= prefix %><%=rc.name%>"><%= Spree.t('rooms') %></label>
+             <!-- TODO validate in the model the min and max value in this field-->
+            <%= select_tag "#{prefix}#{rc.name}", options_for_select([%w(1 1), %w(2 2), %w(3 3), %w(4 4)], selected: params["#{prefix}room_count"]), :class => "#{prefix}inputs form-control"  %>
+          </div>
+        <%end%>
+
+        <% hotel.context_option_types.where(name: 'adult').each do |a| %>
+          <div class="form-group col-md-4">
+            <label for="<%= prefix %><%=a.name%>"><%= Spree.t(a.presentation.downcase) %></label>
+               <!-- TODO validate in the model the min and max value in this field-->
+            <%= number_field_tag "#{prefix}#{a.name}", params["hotel_#{a.name}"], :class => "#{prefix}inputs form-control", min: 1, max: 3 %>
+          </div>
+        <%end%>
+
+        <% hotel.context_option_types.where(name: 'child').each do |c| %>
+          <div class="form-group col-md-4">
+            <label for="<%= prefix %><%=c.name%>"><%= Spree.t(c.presentation.downcase) %></label>
+              <!-- TODO validate in the model the min and max value in this field-->
+              <%= number_field_tag "#{prefix}#{c.name}", params["hotel_#{c.name}"], :class => "#{prefix}inputs form-control", min: 0, max: 2 %>
+           </div>
+        <%end%>
+      </div>
+
+      <%= submit_tag Spree.t('search'), :id => :submit, :class => 'btn btn-success' %>
+
+    <% end %>
+  </div>
+</div>
+

@@ -1,0 +1,6 @@
+<%if @product.product_type%>
+  <%= render partial: "spree/products/#{@product.product_type.name.to_s}s/#{@product.product_type.name.to_s}_show", locals: {product: @product} %>
+<%else%>
+  <%= render :partial => 'cart_form' %>
+<%end%>
+

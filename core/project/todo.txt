@@ -1,0 +1,18 @@
+* [low] poner las cosas de spree_travel_api aqui dentro de spree_travel_core
+* [low] programar el sistema de control de reservar relacionada con spree_travel
+* [low] programar los spree_travel_destinations
+* [low] programar
+
+branch 2.3 de las tres gemas. SpreeTravel(Core, Hotel, Sample)
+
+
+BackEnd
+
+(alto) Todas las variantes tienen precio "0.00"
+(medio) El listado de variantes en la columna Options muestra un "#"
+
+Â¿Los context option types aparecen en el bucador en el mismo order en que se ponen en el ProductType?
+
+Sería muy bueno que para el miercoles, para la entrevista con la agencia de viajes, al menos los altos estuvieran resueltos por si el tipo o el informático quieren ver algo funcionando, o nosotros mostrarle para tener credibilidad.
+
+abrazos

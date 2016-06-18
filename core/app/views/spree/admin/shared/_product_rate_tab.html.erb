@@ -1,0 +1,5 @@
+<%if @product.product_type%>
+  <%= content_tag :li, :class => ('active' if current == 'Product Rate') do %>
+    <%= link_to_with_icon 'tasks', Spree.t(:rates),  admin_product_rates_path(@product) %>
+  <% end if can?(:admin, Spree::Rate) %>
+<%end%>

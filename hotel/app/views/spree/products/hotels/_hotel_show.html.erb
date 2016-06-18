@@ -1,0 +1,21 @@
+<% @product.variants.each do |v|%>
+  <div class="row">
+    <div class="box-title">
+      <h2 class="variant"><%= v.option_values.first.presentation%></h2>
+    </div>
+    <% hashs = display_travel_price(v)%>
+    <% hashs.each do |hash|%>
+      <div class="col-md-3">
+        <div class="">
+          <%= Spree.t(:meal_plan)%>:<%= Spree::OptionValue.find(Spree::Rate.find(hash[:rate]).plan).presentation%>
+        </div>
+        <div class="">
+          <%= Spree.t(:night)%>:<%=hash[:price]%>
+        </div>
+        <div class="action-section">
+          <%= render :partial => 'spree/products/product_type_cart_form', :locals => { product: @product, variant_id: v.id, rate_id: hash[:rate]} %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+<%end%>

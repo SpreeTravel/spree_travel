@@ -1,0 +1,50 @@
+<%#= render :partial => 'spree/admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => 'Product Rate'} %>
+
+<% content_for :page_title do %>
+<%= Spree.t(:rate) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <span id="new_product_type_link">
+      <%= button_link_to Spree.t(:new_rate), new_admin_product_rate_path, { class: "btn-success", icon: 'add', id: 'admin_new_rate_link' }  %>
+    </span>
+<% end %>
+
+<% if !@product.rates.empty? %>
+  <%= render :partial => 'spree/admin/rates/filtering' %>
+<% end %>
+
+<table class="table" id='listing_rates'>
+  <thead>
+    <tr data-hook="rate_<%=@product.product_type.name %>_header">
+      <% for ot in @product.option_types %>
+        <th><%= ot.name %></th>
+      <% end %>
+      <% for ot in @product.rate_option_types %>
+      <th><%= ot.presentation %></th>
+      <% end %>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for rt in @product.rates %>
+    <tr>
+      <% for ot in @product.option_types %>
+        <td><%= rt.variant.option_value(ot.name) %></td>
+      <% end %>
+      <% for ot in @product.rate_option_types %>
+        <td><%= rt.get_persisted_option_value(ot, 'presentation') %></td>
+      <% end %>
+      <td class="actions">
+      <!-- TODO fix bug regarding the links redirecting to some crazy url -->
+	      <%= link_to_edit(rt, :no_text => true, :class => 'admin_edit_rate') %>
+	      <%= link_to_delete(rt, :no_text => true) %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render :partial => 'spree/admin/rates/filtering_logic'%>

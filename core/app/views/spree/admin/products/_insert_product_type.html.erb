@@ -1,0 +1,13 @@
+<div class="col-md-6" data-hook="new_product_type">
+    <%= f.field_container :product_type, :class => ['form-group'] do %>
+      <%= f.label :product_type_id, Spree.t(:product_type) %><br />
+      <%= f.collection_select :product_type_id, Spree::ProductType.all, :id, :presentation, {:include_blank => true}, {:class => 'select2 fullwidth'} %>
+    <% end %>
+</div>
+<div class="col-md-6" data-hook="new_product_type_calculator">
+    <%= f.field_container :calculator, :class => ['form-group'] do %>
+      <%= f.label :calculator_id, Spree.t(:calculator) %><br />
+      <%= f.collection_select :calculator_id, Spree::TravelCalculator.all, :id, :name, {:include_blank => true}, {:class => 'select2 fullwidth'} %>
+    <% end %>
+</div>
+

@@ -1,0 +1,19 @@
+#listing_rate_hotels td {
+}
+
+table td input[type="text"].small {
+  padding: 3px 3px;
+}
+
+table caption {
+  background-color: #5498DA;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+table {
+  border-right: 1px solid #CEE1F4;
+  border-bottom: 1px solid #CEE1F4;
+}

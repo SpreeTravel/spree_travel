@@ -1,0 +1,7 @@
+$('#listing_rates tbody tr').each(function(){
+  attrib = this.style.display;
+  if (attrib != 'none') {
+    this.remove();
+  };
+});
+clear_filters();

@@ -1,0 +1,35 @@
+<% active_product = params[:product_type] %>
+
+<div id="search_box" class= "">
+  <ul id="search_box_tabs" class="nav nav-tabs">
+    <% Spree::ProductType.enabled.each do |p| %>
+      <%
+        prefix = "#{p.name.downcase}_"
+        if active_product
+          if active_product == p.name.downcase
+            active_class = 'active'
+          else
+            active_class = ''
+          end
+        else
+          active_class = 'active'
+          active_product = p.name.downcase
+        end
+      %>
+      <%= content_tag :li, class: active_class, role: 'presentation'  do %>
+        <a data-toggle="tab" role="tab" href='#<%="#{prefix}"%>fields' name=<%="#{p.name}"%> >
+          <%#= Spree.t(p.presentation) %>
+          <%= p.presentation %>
+        </a>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <div id="tabcontent" class="tab-content">
+    <% Spree::ProductType.enabled.each do |p| %>
+      <% prefix = "#{p.name.downcase}_" %>
+      <%= render partial: "spree/shared/#{p.name.to_s}_search_box", locals: {prefix: prefix, p: p, product: @product, active_product: active_product} %>
+    <% end %>
+  </div>
+
+</div>

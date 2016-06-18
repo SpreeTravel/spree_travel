@@ -1,0 +1,27 @@
+<div data-hook="admin_product_rates_form_fields" class="col-md-12">
+  <div class="form-group row">
+     <%= label_tag :variant, Spree.t(:variant), :class => '' %>
+     <%= select_tag 'rate[variant_id]', options_for_select(@product.variants.map { |v| [v.sku, v.id] }, @rate.variant_id), :class => 'select2 fullwidth' %>
+  </div>
+  <% prefix = "#{@product.product_type.name}_" %>
+  <% @product.rate_option_types.each do |ot| %>
+  <div class="form-group row">
+    <%= label_tag ot.name, Spree.t(ot.presentation), :class => '' %>
+       <% current_value = @rate.get_persisted_option_value(ot) %>
+      <% if ot.attr_type == 'selection' %>
+        <%= select_tag ot.name, options_for_select(ot.option_values.map { |ov| [ov.presentation, ov.id] }, current_value), :class => 'select2 fullwidth' %>
+      <% elsif ot.attr_type == 'integer' %>
+        <%= number_field_tag ot.name, current_value, :class => 'form-control', :min => 0 %>
+      <% elsif ot.attr_type == 'float' %>
+        <%= number_field_tag ot.name, current_value, :class => 'form-control' , :min => 0%>
+      <% elsif ot.attr_type == 'boolean' %>
+        <%= check_box_tag ot.name, 1 %>
+      <% elsif ot.attr_type == 'date' %>
+        <%= text_field_tag ot.name, current_value, :class => 'datepicker form-control col-md-6' %>
+      <% else %>
+        <%= text_field_tag ot.name, current_value, :class => 'fullwidth form-control' %>
+      <% end %>
+   </div>
+  <% end %>
+</div>
+

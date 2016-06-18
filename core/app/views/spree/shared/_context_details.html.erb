@@ -1,0 +1,12 @@
+<%if item.product.product_type %>
+  <br/>
+  <h4><%= Spree.t(:paxes) %></h4>
+  <% item.paxes.each do |p| %>
+    <%= p.first_name %>
+  <% end %>
+  <br/>
+  <h4><%= Spree.t(:reservation_details) %></h4>
+  <%item.product.product_type.context_option_types.each do |cot|%>
+    <strong><%= cot.presentation%></strong>:<%= item.context.get_mixed_option_value(cot.name, temporal:false)%><br/>
+  <%end%>
+<%end%>

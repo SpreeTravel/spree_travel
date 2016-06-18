@@ -1,0 +1,49 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:listing_product_types) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <span id="new_product_type_link">
+      <%= button_link_to Spree.t(:new_product_type), new_object_url, { class: "btn-success", icon: 'add', id: 'new_product_type_link' }  %>
+    </span>
+<% end %>
+
+<div id="new_product_type"></div>
+
+<% if @product_types.any? %>
+<table class="table index" id='listing_product_types' data-hook>
+  <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 25%" />
+    <col style="width: 10%" />
+    <col style="width: 15%" />
+  </colgroup>
+  <thead>
+  <tr data-hook="product_type_header">
+    <th><%= Spree.t(:name) %></th>
+    <th><%= Spree.t(:presentation) %></th>
+    <th><%= Spree.t(:enabled) %></th>
+    <th class="actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @product_types.each do |product_type| %>
+  	<tr id="<%= spree_dom_id product_type %>" data-hook="listing_product_type_row" class="<%= cycle('odd', 'even')%>">
+      <td style="padding-left:1em"><%= product_type.name %></td>
+      <td style="padding-left:1em"><%= product_type.presentation %></td>
+	  <td style="padding-left:1em"><%=  product_type.enabled ? 'Yes' : 'No' %></td>
+      <td class="actions">
+        <%= link_to_edit(product_type, :no_text => true) %>
+        <%= link_to_delete(product_type, :no_text => true) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::ProductType)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url %>!
+  </div>
+
+<% end %>

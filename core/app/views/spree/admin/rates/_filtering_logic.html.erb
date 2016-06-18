@@ -1,0 +1,150 @@
+<script type="text/javascript">
+  var filter = {};
+  function add_to_filter() {
+    switch (this.getAttribute('data-type')) {
+      case "date":
+        name = this.getAttribute('id');
+        from_value = $("#s2id_"+name+"_from .select2-chosen").text();
+        if (from_value != "") {
+          date_from = from_value.split("/");
+          from = new Date(date_from[0], date_from[1]-1, date_from[2]);
+          to_value = $("#s2id_"+name+"_to .select2-chosen").text();
+          if (to_value != "") {
+            date_to = to_value.split("/");
+            to = new Date(date_to[0], date_to[1]-1, date_to[2]);
+            filter[name] = [from_value, to_value];
+          }
+        }
+        break;
+      case "float":
+      case "integer":
+        name = this.getAttribute('id');
+        criteria = $("#s2id_"+name+"_comparison .select2-chosen").text();
+        if (criteria != "") {
+          value = $("#s2id_"+name+" .select2-chosen").text();
+          if (value != "") {
+            filter[name] = [criteria, value];
+          }
+        };
+        break;
+      default:
+        name = this.getAttribute('id');
+        value = $("#s2id_"+name+" .select2-chosen").text();
+        if (value != "") {
+          filter[name] = value;
+        };
+        break;
+    }
+  }
+
+  function execute_filter () {
+    var passes = true;
+    the_id = this.getAttribute("id");
+    $("#"+the_id+" td").each(function (t) {
+      name = this.getAttribute('data-id');
+      type = this.getAttribute('data-type');
+      if (name != null) {
+        switch (type) {
+          case "date":
+            if (filter[name] != null) {
+              from_date = filter[name][0];
+              to_date = filter[name][1];
+              check_value = this.innerHTML;
+              date_check = check_value.split("/");
+              check = new Date(date_check[0], date_check[1]-1, date_check[2]);
+              passes = passes && (check >= from && check <= to);
+            }
+            break;
+          case "float":
+          case "integer":
+            if (filter[name] != null) {
+              criteria = filter[name][0];
+              switch (criteria) {
+                case ">":
+                  passes = passes &&  parseFloat(this.innerHTML) > parseFloat(filter[name][1]);
+                  break;
+                case "<":
+                  passes = passes &&  parseFloat(this.innerHTML) < parseFloat(filter[name][1]);
+                  break;
+                case "<=":
+                  passes = passes &&  parseFloat(this.innerHTML) <= parseFloat(filter[name][1]);
+                  break;
+                case ">=":
+                  passes = passes &&  parseFloat(this.innerHTML) >= parseFloat(filter[name][1]);
+                  break;
+                default:
+                  passes = passes &&  parseFloat(this.innerHTML) == parseFloat(filter[name][1]);
+                  break;
+              }
+            }
+            break;
+          default:
+            if (filter[name] != null) {
+              passes = passes &&  this.innerHTML == filter[name];
+            }
+            break;
+        }
+      }
+    });
+    if (!passes) {
+      this.style.display= "none";
+    }
+    else{
+      this.style.display= "table-row";
+    }
+  }
+
+  function update_rates_list_to_delete(){
+    var rates_ids = [];
+    $('#listing_rates tbody tr').each(function(){
+      attrib = this.style.display;
+      if (attrib != 'none') {
+        rates_ids.push(this.getAttribute("id"));
+      };
+    });
+    $('#rates').val(rates_ids);
+  }
+
+  function start_filter () {
+    $('.filter_wrapper').each(add_to_filter);
+    $('#listing_rates tbody tr').each(execute_filter);
+    update_rates_list_to_delete();
+  }
+
+  function reset_values(){
+    switch (this.getAttribute('data-type')) {
+      case "date":
+        name = this.getAttribute('id');
+        $("#s2id_"+name+"_from .select2-chosen").html("");
+        $("#s2id_"+name+"_to .select2-chosen").html("");
+        break;
+      case "float":
+      case "integer":
+        name = this.getAttribute('id');
+        $("#s2id_"+name+"_comparison .select2-chosen").html("");
+        $("#s2id_"+name+" .select2-chosen").html("");
+        break;
+      default:
+        name = this.getAttribute('id');
+        $("#s2id_"+name+" .select2-chosen").html("");
+        break;
+    }
+  }
+
+  function clear_filters () {
+    $('.filter_wrapper').each(reset_values);
+    $('#listing_rates tbody tr').each(function(){
+      this.style.display= "table-row";
+    });
+    filter = {};
+    update_rates_list_to_delete();
+  }
+
+  $(document).ready(function() {
+    $('.filter_wrapper').each(reset_values);
+    $('#filter_button').attr('onclick', 'start_filter()');
+    $('#clear_filter_button').attr('onclick', 'clear_filters()');
+    update_rates_list_to_delete();
+  });
+
+</script>

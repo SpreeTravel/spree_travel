@@ -1,0 +1,22 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+  other_variants: "Other options available for the product."
+  childrens_label: "Product childrens"
+  successfully_deleted_rates: "Success deleting rates"
+  spree:
+    pax: Pax
+    new_rate: new rate
+    starting: Starting at
+    product: Product
+    show_only_available_products: "Show only available products"
+    keywords: 'Keywords'
+    filter: "Filter"
+    rates: "Rates"
+    order_state:
+      pax: Pax
+    no_cart: No Cart Settings
+    product_type: Product Type
+

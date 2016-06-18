@@ -1,0 +1,3 @@
+<!-- insert_after "erb[loud]:contains('link_to product')" 
+     sequence :after => "change_product_index_partial" -->
+<span class="stars-1"></span>

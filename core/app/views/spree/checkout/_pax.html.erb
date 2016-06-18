@@ -1,0 +1,35 @@
+<div class="row">
+
+<% @order.line_items.each_with_index do |line_item, index1| %>
+
+  <div class="row">
+      <strong><%= line_item.product.name %>:</strong></td>
+  </div>
+    <div class="row">
+  <% line_item.paxes.each_with_index do |pax, index| %>
+    <div class="col-sm-6" data-hook="billing_fieldset_wrapper">
+      <div class="panel panel-default" id="billing" data-hook>
+        <div class="panel-heading">
+          <h3 class="panel-title">Pax #<%= index +1 %></h3>
+        </div>
+        <div class="panel-body">
+          <p class="form-group" id=<%="#{index}firstname" %>>
+            <%= label_tag :first_name, Spree.t(:first_name) %><span class="required">*</span><br />
+            <%= text_field_tag "order[line_items_attributes][#{index1}][paxes_attributes][][first_name]", nil, :class => 'form-control required' %>
+          </p>
+          <p class="form-group" id=<%="#{index}lastname" %>>
+            <%= label_tag :last_name, Spree.t(:last_name) %><span class="required">*</span><br />
+            <%= text_field_tag "order[line_items_attributes][#{index1}][paxes_attributes][][last_name]", nil, :class => 'form-control required' %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>
+<% end %>
+
+</div>
+
+<div class="well text-right form-buttons" data-hook="buttons">
+  <%= submit_tag Spree.t(:save_and_continue), :class => 'btn btn-lg btn-success' %>
+ </div>

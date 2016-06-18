@@ -1,0 +1,22 @@
+/*
+ *= require spree/backend
+*/
+
+.filter_wrapper {
+  float: left;
+  margin: 4px;
+}
+
+.filter_action {
+  float: left;
+  margin: 10px;
+}
+
+.filter_action button{
+  margin: 12px;
+  padding: 12px;
+}
+
+.filter_wrapper div{
+  margin: 10px;
+}
